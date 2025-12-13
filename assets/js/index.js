@@ -1,34 +1,49 @@
 
-  document.querySelectorAll('.you-need-slider').forEach(slider => {
-    new Swiper(slider, {
+const swiperObserver = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+
+    new Swiper(entry.target, {
       slidesPerView: 1,
       spaceBetween: 24,
       centeredSlides: true,
-      loop: false,
       speed: 600,
       pagination: {
-        el: slider.querySelector('.swiper-pagination'),
+        el: entry.target.querySelector('.swiper-pagination'),
         clickable: true,
       },
     });
-  });
-  
-  const hWorkTracks = document.querySelectorAll(".i-work-partners-track");
 
-hWorkTracks.forEach((track) => {
-  const items = Array.from(track.children);
-
-  items.forEach((item) => track.appendChild(item.cloneNode(true)));
-
-  const totalWidth = track.scrollWidth / 2;
-
-  gsap.to(track, {
-    x: -totalWidth,
-    duration: 70,
-    ease: "none",
-    repeat: -1,
-    modifiers: {
-      x: gsap.utils.unitize((x) => parseFloat(x) % -totalWidth),
-    },
+    obs.unobserve(entry.target);
   });
 });
+
+document.querySelectorAll('.you-need-slider').forEach(slider => {
+  swiperObserver.observe(slider);
+});
+  
+  const tracks = document.querySelectorAll('.i-work-partners-track');
+
+  tracks.forEach(track => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  
+    const items = [...track.children];
+    items.forEach(item => track.appendChild(item.cloneNode(true)));
+  
+    const totalWidth = track.scrollWidth / 2;
+  
+    const anim = gsap.to(track, {
+      x: -totalWidth,
+      duration: 120,
+      ease: "linear",
+      repeat: -1,
+      paused: true,
+      force3D: true
+    });
+  
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting ? anim.play() : anim.pause());
+    });
+  
+    observer.observe(track);
+  });
