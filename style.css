@@ -231,23 +231,27 @@ body {
   background: #18181C;
   position: relative;
   z-index: 0;
-  padding-top: 112px;
   overflow: hidden;
 }
 
-.i-main-container .i-top-bg{
-  width: 100%;
-  height: 50vw;
-  position: absolute;
-  top: -112px;
-  background: url(assets/images/i-top-bg.webp);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
+.i-top-bg{
+  display: flex;
   left: 0;
-  z-index: -1;
+  top: 0;
+  position: absolute;
+      height: 100%;
+    width: 100%;
+    z-index: -1;
 }
-
+.i-top-bg picture{
+       height: 100%;
+    width: 100%;
+    display: flex;
+}
+.i-top-bg img{
+        height: 100%;
+    width: 100%;
+}
 .i-main-container .swiper-pagination{
   position: static;
   margin-top: 10px;
@@ -316,25 +320,29 @@ body {
 }
 
 .i-banner{
-  padding-top: 75px;
+  padding-top: 180px;
   padding-bottom: 150px;
   position: relative;
-  z-index: 0;
+  z-index: 2;
 }
 .i-banner .i-mobile-img{
   display: none;
 }
 .i-banner .i-left-img{
  position: absolute;
- top: 30px;
+ top: 153px;
+ max-width: 375px;
+ width: 100%;
  left: 0;
- z-index: -1;
+ z-index: 1;
 }
 .i-banner .i-right-img{
   position: absolute;
- top: 30px;
+ top: 147px;
  right: 0;
- z-index: -1;
+ z-index: 1;
+  max-width: 300px;
+ width: 100%;
 }
 .i-banner .i-info-block{
   max-width: 660px;
@@ -436,6 +444,8 @@ body {
 
 .i-brand-logos{
   padding: 50px 0;
+  position: relative;
+  z-index: 2;
 }
 .i-brand-logos .i-container{
   text-align: center;
@@ -486,7 +496,7 @@ body {
 }
 
 .i-information{
-  padding-top: 30px;
+  padding-top: 110px;
   padding-bottom: 80px;
 }
 .i-information.style2 h5{
@@ -784,7 +794,6 @@ color: white;
   }
   .i-banner{
     padding-bottom: 30px;
-    padding-top: 30px;
 
   }
 }
@@ -806,18 +815,7 @@ color: white;
   .i-header-info{
     border-radius: 8px;
   }
-  .i-main-container .i-top-bg{
-    width: 100%;
-    height: 260vw;
-    position: absolute;
-    background: url(assets/images/i-top-bg-mobile.webp);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    left: 0;
-    z-index: -1;
-    top: -85px;
-  }
+
   .i-header .i-white-btn{
     padding: 8px 13px;
   }
@@ -960,9 +958,7 @@ color: white;
   .i-info-block p span{
     display: block;
   }
-  .i-main-container{
-    padding-top: 90px;
-  }
+  
   .i-banner .i-info-block h1{
     line-height: 28px;
   }
@@ -1001,6 +997,15 @@ color: white;
 }
 
 @media(max-width: 575px){
+  .i-top-bg{
+    height: 114%;
+  }
+  .i-information{
+    padding: 10px 0 0 ;
+  }
+  .i-banner{
+    padding: 120px 0 0 ;
+  }
   .i-music-block{
     max-width: 1100px;
     margin: 0;
